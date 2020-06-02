@@ -12,6 +12,7 @@ DATA = DataFrame({
 
 
 def custom_filter(slider_value: str) -> DataFrame:
+    """ Filter for specifying data """
     rate = int(slider_value)
     return DATA[DATA['Rating'] >= rate]
 
@@ -19,12 +20,14 @@ def custom_filter(slider_value: str) -> DataFrame:
 @app.route("/")
 @app.route("/index")
 def index():
+    """ Standard index """
     return render_template("index.html")
 
 
 @app.route("/data-slider")
 @app.route("/data-slider", methods=['GET'])
-def slider():
+def data_slider():
+    """ Recursive GET """
     val = request.args.get('val')
     if val is not None:
         return render_template(
