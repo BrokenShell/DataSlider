@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div>
+    <h3>Data Selection Slider</h3>
+    <p>Input Rating:
+        <input type="range" min="0" max="9" value="{{ val }}" class="slider"
+               id="myRange">
+        {{ val }}
+    </p>
+    {% if val %}
+    <table>
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Rating</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for row in find(val).values %}
+            <tr>
+            {% for cell in row %}
+                <td>{{ cell }}</td>
+            {% endfor %}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+    <input id="hidden" hidden="hidden" value="{{ val }}">
+</div>
+<script type="text/javascript">
+// Fire the update function when the input changes
+
+function update() {
+    const newVal = document.getElementById("myRange").value;
+    window.location.href = "/data-slider?val=" + newVal;
+}
+document.getElementById("myRange").addEventListener("change", update);
+
+</script>
+{% endblock %}
