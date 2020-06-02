@@ -16,4 +16,3 @@ Filtered DataFrame based on user input via slider.
 
 ### High
 ![alt text](graphics/image_3.png "high rating")
-
