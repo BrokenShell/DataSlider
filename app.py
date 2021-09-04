@@ -1,39 +1,34 @@
 from flask import Flask, render_template, request
 from pandas import DataFrame
+from random import randint
 
 
 app = Flask(__name__)
-
-# placeholder data
-DATA = DataFrame({
-    'Name': ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'],
-    'Rating': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+app.df = DataFrame({
+    'Name': ('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'h'),
+    'Rating': (randint(0, 100) for _ in range(11)),
 })
-
-
-def custom_filter(slider_value: str) -> DataFrame:
-    """ Filter for specifying data """
-    rate = int(slider_value)
-    return DATA[DATA['Rating'] >= rate]
 
 
 @app.route("/")
 @app.route("/index")
 def index():
-    """ Standard index """
     return render_template("index.html")
 
 
 @app.route("/data-slider")
-@app.route("/data-slider", methods=['GET'])
 def data_slider():
-    """ Recursive GET """
-    val = request.args.get('val')
-    if val is not None:
-        return render_template(
-            "data-slider.html", val=val, find=custom_filter)
-    else:
-        return render_template("data-slider.html")
+    df = app.df
+    lower_limit = int(request.values.get('lower_limit', df['Rating'].mean()))
+    filtered = df[df['Rating'] >= lower_limit]
+    return render_template(
+        "data-slider.html",
+        lower_limit=lower_limit,
+        df_table=filtered.to_html(),
+        minimum=df["Rating"].min(),
+        maximum=df["Rating"].max(),
+        total=filtered["Rating"].sum(),
+    )
 
 
 if __name__ == '__main__':

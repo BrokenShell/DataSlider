@@ -1,41 +1,15 @@
 {% extends "layout.html" %}
 {% block content %}
-
-<div>
-    <h3>Data Selection Slider</h3>
-    <p>Input Rating:
-        <input type="range" min="0" max="9" value="{{ val }}" class="slider"
-               id="myRange">
-        {{ val }}
+    <h1 class="heading">Data Selection Slider</h1>
+    <p>
+        <label>Rating Limiter:
+            <input type="range" min={{ minimum }}max={{ maximum }}
+                   value="{{ lower_limit }}" class="slider"
+                   onchange=window.location.assign(`/data-slider?lower_limit=${this.value}`)>
+        </label>
+        {{ lower_limit }} or higher
     </p>
-    {% if val %}
-    <table>
-        <thead>
-            <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Rating</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for row in find(val).values %}
-            <tr>
-            {% for cell in row %}
-                <td>{{ cell }}</td>
-            {% endfor %}
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-    {% endif %}
-    <input id="hidden" hidden="hidden" value="{{ val }}">
-</div>
-<script type="text/javascript">
-// Fire the update function when the input changes
-
-function update() {
-    const newVal = document.getElementById("myRange").value;
-    window.location.href = "/data-slider?val=" + newVal;
-}
-document.getElementById("myRange").addEventListener("change", update);
-</script>
+    <h2>Pandas DataFrame</h2>
+    {{ df_table | safe }}
+    <h3>Total: {{ total | safe }}</h3>
 {% endblock %}

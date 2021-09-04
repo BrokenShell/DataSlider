@@ -1,18 +1,62 @@
-table {
-    width: 160px;
-    color: #aaaaaa;
-    margin: 0 100px;
+#form {
+    width: 330px;
+    margin: 0 0 40px 0;
 }
-table th {
+
+#form p {
+    margin: 0 0 15px;
+}
+
+#form input {
+    width: 140px;
+    margin: 0 20px 0 5px;
+    cursor: text;
+    padding: 0 10px;
+    float: right;
+}
+
+#form select {
+    width: 164px;
+    margin: 0 20px 0 5px;
+    cursor: pointer;
+    padding: 0 8px;
+    float: right;
+}
+
+button {
+    padding: 3px 0;
+    width: 167px;
+    cursor: pointer;
+    margin-right: 19px;
+    margin-top: 2px;
+    float: right;
+    border-radius: 3px;
+}
+
+button.classic {
+    float: none;
+}
+
+button:hover {
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+#form textarea {
+    margin: 20px 0 40px 0;
+    width: 500px;
+    height: 200px;
+}
+
+table.dataframe {
+    font-size: 14px;
     text-align: left;
-    min-width: 40px;
 }
-table td {
-    max-width: 120px;
+
+table.dataframe th {
+    padding: 5px 10px;
+    text-align: left;
 }
-table thead {
-    border-bottom: 1px solid #666666;
-}
-table tbody tr:nth-of-type(1) {
-    background-color: #333;
+
+table.dataframe td {
+    padding: 5px 10px;
 }
