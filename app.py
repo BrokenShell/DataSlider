@@ -19,7 +19,7 @@ def index():
 @app.route("/data-slider")
 def data_slider():
     df = app.df
-    lower_limit = int(request.values.get('lower_limit', df['Rating'].mean()))
+    lower_limit = int(request.values.get('lower_limit', df['Rating'].mode()))
     filtered = df[df['Rating'] >= lower_limit]
     return render_template(
         "data-slider.html",
@@ -27,7 +27,7 @@ def data_slider():
         df_table=filtered.to_html(),
         minimum=df["Rating"].min(),
         maximum=df["Rating"].max(),
-        total=filtered["Rating"].sum(),
+        total=filtered.shape[0],
     )
 
 

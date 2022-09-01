@@ -3,7 +3,7 @@
     <h1 class="heading">Data Selection Slider</h1>
     <p>
         <label>Rating Limiter:
-            <input type="range" min={{ minimum }}max={{ maximum }}
+            <input type="range" min={{ minimum }} max={{ maximum }}
                    value="{{ lower_limit }}" class="slider"
                    onchange=window.location.assign(`/data-slider?lower_limit=${this.value}`)>
         </label>
@@ -11,5 +11,5 @@
     </p>
     <h2>Pandas DataFrame</h2>
     {{ df_table | safe }}
-    <h3>Total: {{ total | safe }}</h3>
+    <h3>Active Rows: {{ total }}</h3>
 {% endblock %}
